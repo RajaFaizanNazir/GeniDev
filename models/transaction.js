@@ -13,5 +13,5 @@ const transactionSchema = new Transaction(
   }
 );
 /**************************************** */
-module.exports = mongoose.model("Transaction", historySchema);
+module.exports = mongoose.model("Transaction", transactionSchema);
 /**************************************** */

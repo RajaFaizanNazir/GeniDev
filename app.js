@@ -1,33 +1,19 @@
-process.env.TOKEN_SECRET = "blochain_gametrain";
-process.env.PORT = 5000;
 /**************************************** */
 const fs = require("fs");
+process.env.PORT = 5000;
 /**************************************** */
 const express = require("express");
-const bodyParser = require("body-parser"); 
+const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 /**************************************** */
-const usersRoutes = require("./routes/users-routes");
-const adminRoutes = require("./routes/admin-routes");
+const transactionsRoutes = require("./routes/transactions-routes");
 const HttpError = require("./util/http-error");
 /**************************************** */
 const app = express();
 /**************************************** */
 app.use(bodyParser.json());
 /**************************************** */
-/*app.use((req, res, next) => {
-  res.setHeMONGO_URIader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
-  next();
-});*/
-/**************************************** */
-app.use("/api/users", usersRoutes);
-/**************************************** */
-app.use("/api/admin", adminRoutes);
+app.use("/api/history", transactionsRoutes);
 /**************************************** */
 app.use((req, res, next) => {
   const error = new HttpError("Could not find this route.", 404);
@@ -48,11 +34,15 @@ app.use((error, req, res, next) => {
 });
 /**************************************** */
 mongoose
-  .connect("mongodb://127.0.0.1/spm_gametrain")
+  .connect(
+    "mongodb+srv://faizan:123@bootcamp.apuj8.mongodb.net/GeniDev?retryWrites=true&w=majority"
+  )
   .then(() => {
-    app.listen(process.env.PORT);
+    app.listen(process.env.PORT, () => {
+      console.log("Server is up port " + process.env.PORT);
+    });
   })
   .catch((err) => {
-    console.log(err);
+    console.log("Error connecting to cloud" + err);
   });
 /**************************************** */

@@ -1,5 +1,6 @@
 const HttpError = require("../util/http-error");
 const Transaction = require("../models/transaction");
+const validator = require("../middleware/validate");
 /**************************************** */
 const getTransactions = async (req, res, next) => {
   let transactions;
@@ -62,7 +63,7 @@ const getTransactionByToAddress = async (req, res, next) => {
 };
 /**************************************** */
 const transfer = async (req, res, next) => {
-  const errors = Transaction.validationResult(req);
+  const errors = validator.validationResult(req);
   if (!errors.isEmpty()) {
     return next(
       new HttpError("Invalid inputs passed, please check your data.", 422)

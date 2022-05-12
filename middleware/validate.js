@@ -16,5 +16,6 @@ module.exports = {
   fromValidator,
   toValidator,
   amountValidator,
+  validationResult,
 };
 /**************************************** */
