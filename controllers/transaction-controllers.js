@@ -33,7 +33,7 @@ const getTransactionByFromAddress = async (req, res, next) => {
   }
 
   if (!existingTransaction) {
-    const error = new HttpError("Invalid Email, Not found.", 403);
+    const error = new HttpError("Invalid address, Not found.", 403);
     return next(error);
   }
   res.json(existingTransaction);
@@ -46,7 +46,7 @@ const getTransactionByToAddress = async (req, res, next) => {
       new HttpError("Invalid inputs passed, please check your data.", 422)
     );
   }
-  const { from } = req.body;
+  const { to } = req.body;
   let existingTransaction;
   try {
     existingTransaction = await Transaction.findOne({ to: to });
@@ -56,7 +56,7 @@ const getTransactionByToAddress = async (req, res, next) => {
   }
 
   if (!existingTransaction) {
-    const error = new HttpError("Invalid Email, Not found.", 403);
+    const error = new HttpError("Invalid address, Not found.", 403);
     return next(error);
   }
   res.json(existingTransaction);

@@ -5,7 +5,7 @@ const fromValidator = () => {
 };
 /**************************************** */
 const toValidator = () => {
-  return [body("from").exists()];
+  return [body("to").exists()];
 };
 /**************************************** */
 const amountValidator = () => {
