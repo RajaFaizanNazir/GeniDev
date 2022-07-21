@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use("/api/history", transactionsRoutes);
 /**************************************** */
 app.use((req, res, next) => {
-  const error = new HttpError("Could not find this route.", 404);
+  const error = new HttpError("Could not find this route", 404);
   throw error;
 });
 /**************************************** */
